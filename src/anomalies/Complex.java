@@ -36,8 +36,8 @@ package anomalies;
 
 
 public class Complex {
-	private final double re;   // the real part
-	private final double im;   // the imaginary part
+	private final double re;   // the real part will represent a value of time
+	private final double im;   // the imaginary part will represent a mesure at a time
 
 	// create a new object with the given real and imaginary parts
 	public Complex(final double real, final double imag) {
