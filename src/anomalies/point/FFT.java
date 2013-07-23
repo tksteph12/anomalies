@@ -19,7 +19,8 @@
  * 
  *************************************************************************/
 
-package anomalies;
+package anomalies.point;
+
 
 /**
  * @author statchum

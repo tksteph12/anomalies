@@ -11,43 +11,43 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import anomalies.Complex;
+import anomalies.point.Complex;
 import anomalies.signal.Signal;
 
 /**
  * @author statchum
- *
+ * 
  */
 public class TestStatistics {
 
-	private  Signal signal;
+	private Signal signal;
 
 	@Before
-	public void buildSignal(){
+	public void buildSignal() {
 		final List<Complex> points = new ArrayList<Complex>();
 		Complex point;
-		//-------------------------------------------------------
+		// -------------------------------------------------------
 
-		for (int i=1;i<=60;i++){
+		for (int i = 1; i <= 60; i++) {
 
-			point= new Complex(i,i);
+			point = new Complex(i, i);
 			points.add(point);
 		}
-		signal = new Signal(points);
+		signal = new Signal(points, 60);
 	}
 
 	@Test
 	public void testMean() {
-		Assert.assertEquals(30.5,signal.getMean(),0.01);
+		Assert.assertEquals(30.5, signal.getMean(60), 0.01);
 	}
 
 	@Test
 	public void testVariance() {
-		Assert.assertEquals(299.9166667	,signal.getVariance(),0.01);
+		Assert.assertEquals(299.9166667, signal.getVariance(60), 0.01);
 	}
 
 	@Test
 	public void testStandardDeviation() {
-		Assert.assertEquals(17.31810228,signal.getStandardDeviation(),0.01);
+		Assert.assertEquals(17.31810228, signal.getStandardDeviation(60), 0.01);
 	}
 }
