@@ -19,13 +19,13 @@ public class Statistics {
 	}
 
 	/*
-	 * evaluates the mean of the last "period" mesures of a signal
+	 * evaluates the mean of the last "period" mesures of a signal from limit position backward
 	 */
-	public double mean(final Signal signal, int period) {
+	public double mean(final Signal signal, int period, int limit) {
 		final List<Complex> points = signal.getPoints();
 		double sum = 0, mean = 0;
-		int start = (period > points.size()) ? 0 : points.size() - period;
-		for (int i = start; i < points.size(); i++) {
+		int start = (period > limit) ? 0 : limit - period;
+		for (int i = start; i < limit; i++) {
 			final Complex point = points.get(i);
 			sum += point.im();
 		}
@@ -35,15 +35,15 @@ public class Statistics {
 	}
 
 	/*
-	 * evaluates the variance of the last "period" mesures of a signal
+	 * evaluates the variance of the last "period" mesures of a signal from limit position backward
 	 */
-	public double variance(final Signal signal, int period) {
+	public double variance(final Signal signal, int period, int limit) {
 		final List<Complex> points = signal.getPoints();
 		double sum = 0, mean = 0, mSum = 0;
 		double variance = 0;
 
-		int start = (period > points.size()) ? 0 : points.size() - period;
-		for (int i = start; i < points.size(); i++) {
+		int start = (period > limit) ? 0 : limit - period;
+		for (int i = start; i < limit; i++) {
 			final Complex point = points.get(i);
 			sum += point.im() * point.im();
 			mSum += point.im();
@@ -56,10 +56,10 @@ public class Statistics {
 	}
 
 	/*
-	 * evaluates the standard deviation of the last "period" mesures of a signal
+	 * evaluates the standard deviation of the last "period" mesures of a signal from limit position backward
 	 */
-	public double standardDeviation(final Signal signal, int period) {
-		final double variance = variance(signal, period);
+	public double standardDeviation(final Signal signal, int period, int limit) {
+		final double variance = variance(signal, period, limit);
 		return Math.sqrt(variance);
 	}
 }

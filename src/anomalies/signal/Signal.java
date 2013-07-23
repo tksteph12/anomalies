@@ -26,42 +26,44 @@ public class Signal {
 		this.points = points;
 		this.period = period;
 
-		mean = getMean(period);
-		sigma = getStandardDeviation(period);
+		mean = getMean(period, points.size());
+		sigma = getStandardDeviation(period, points.size());
 	}
 
 	public List<Complex> getPoints() {
 		return points;
 	}
 
-	public double getMean(int period) {
-		return stats.mean(this, period);
+	public double getMean(int period, int limit) {
+		return stats.mean(this, period, limit);
 	}
 
-	public double getStandardDeviation(int period) {
-		return stats.standardDeviation(this, period);
+	public double getStandardDeviation(int period, int limit) {
+		return stats.standardDeviation(this, period, limit);
 	}
 
-	public double getVariance(int period) {
-		return stats.variance(this, period);
+	/*
+	 * nsd : number of standard deviations =2???
+	 */
+	public double getVariance(int period, int limit) {
+		return stats.variance(this, period, limit);
 	}
 
 	public double upperBand(Complex point, int nsd) {
-		double meanMiddle = 0;
+		double meanMiddle = getMean(period, this.points.size() - 1);
 		return meanMiddle + sigma * nsd;
 	}
 
 	public double lowerBand(Complex point, int nsd) {
-		double meanMiddle = 0;
+		double meanMiddle = getMean(period, this.points.size() - 1);
 		return meanMiddle - sigma * nsd;
 
 	}
 
 	public void addPoint(Complex point) {
 		points.add(point);
-		mean = getMean(period);
-		sigma = getStandardDeviation(period);
-
+		mean = getMean(period, points.size());
+		sigma = getStandardDeviation(period, points.size());
 	}
 
 	// *

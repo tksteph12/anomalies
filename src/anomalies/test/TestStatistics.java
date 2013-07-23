@@ -38,16 +38,16 @@ public class TestStatistics {
 
 	@Test
 	public void testMean() {
-		Assert.assertEquals(30.5, signal.getMean(60), 0.01);
+		Assert.assertEquals(30.5, signal.getMean(60, 60), 0.01);
 	}
 
 	@Test
 	public void testVariance() {
-		Assert.assertEquals(299.9166667, signal.getVariance(60), 0.01);
+		Assert.assertEquals(299.9166667, signal.getVariance(60, 60), 0.01);
 	}
 
 	@Test
 	public void testStandardDeviation() {
-		Assert.assertEquals(17.31810228, signal.getStandardDeviation(60), 0.01);
+		Assert.assertEquals(17.31810228, signal.getStandardDeviation(60, 60), 0.01);
 	}
 }
