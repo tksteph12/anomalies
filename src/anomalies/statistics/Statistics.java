@@ -6,7 +6,7 @@ package anomalies.statistics;
 
 import java.util.List;
 
-import anomalies.point.Complex;
+import anomalies.DataPoint;
 import anomalies.signal.Signal;
 
 /**
@@ -22,14 +22,16 @@ public class Statistics {
 	 * evaluates the mean of the last "period" mesures of a signal from limit position backward
 	 */
 	public double mean(final Signal signal, int period, int limit) {
-		final List<Complex> points = signal.getPoints();
+		final List<DataPoint> points = signal.getPoints();
 		double sum = 0, mean = 0;
 		int start = (period > limit) ? 0 : limit - period;
+		int N = 0;
 		for (int i = start; i < limit; i++) {
-			final Complex point = points.get(i);
-			sum += point.im();
+			N++;
+			final DataPoint point = points.get(i);
+			sum += point.getValue();
 		}
-		mean = sum / points.size();
+		mean = sum / N;
 
 		return mean;
 	}
@@ -38,19 +40,20 @@ public class Statistics {
 	 * evaluates the variance of the last "period" mesures of a signal from limit position backward
 	 */
 	public double variance(final Signal signal, int period, int limit) {
-		final List<Complex> points = signal.getPoints();
+		final List<DataPoint> points = signal.getPoints();
 		double sum = 0, mean = 0, mSum = 0;
 		double variance = 0;
-
+		int N = 0;
 		int start = (period > limit) ? 0 : limit - period;
 		for (int i = start; i < limit; i++) {
-			final Complex point = points.get(i);
-			sum += point.im() * point.im();
-			mSum += point.im();
+			N++;
+			final DataPoint point = points.get(i);
+			sum += point.getValue() * point.getValue();
+			mSum += point.getValue();
 		}
 
-		mean = mSum / points.size();
-		variance = sum / points.size() - mean * mean;
+		mean = mSum / N;
+		variance = sum / N - mean * mean;
 
 		return variance;
 	}

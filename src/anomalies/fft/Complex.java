@@ -1,4 +1,3 @@
-
 /*************************************************************************
  *  Compilation:  javac Complex.java
  *  Execution:    java Complex
@@ -27,17 +26,16 @@
  *  tan(a)       = -6.685231390246571E-6 + 1.0000103108981198i
  *
  *************************************************************************/
-package anomalies.point;
+package anomalies.fft;
 
 /**
  * @author statchum
- *
+ * 
  */
 
-
 public class Complex {
-	private final double re;   // the real part will represent a value of time
-	private final double im;   // the imaginary part will represent a mesure at a time
+	private final double re; // the real part
+	private final double im; // the imaginary part
 
 	// create a new object with the given real and imaginary parts
 	public Complex(final double real, final double imag) {
@@ -54,19 +52,24 @@ public class Complex {
 		if (re == 0) {
 			return im + "i";
 		}
-		if (im <  0) {
+		if (im < 0) {
 			return re + " - " + -im + "i";
 		}
 		return re + " + " + im + "i";
 	}
 
 	// return abs/modulus/magnitude and angle/phase/argument
-	public double abs()   { return Math.hypot(re, im); }  // Math.sqrt(re*re + im*im)
-	public double phase() { return Math.atan2(im, re); }  // between -pi and pi
+	public double abs() {
+		return Math.hypot(re, im);
+	} // Math.sqrt(re*re + im*im)
+
+	public double phase() {
+		return Math.atan2(im, re);
+	} // between -pi and pi
 
 	// return a new Complex object whose value is (this + b)
 	public Complex plus(final Complex b) {
-		final Complex a = this;             // invoking object
+		final Complex a = this; // invoking object
 		final double real = a.re + b.re;
 		final double imag = a.im + b.im;
 		return new Complex(real, imag);
@@ -95,17 +98,24 @@ public class Complex {
 	}
 
 	// return a new Complex object whose value is the conjugate of this
-	public Complex conjugate() {  return new Complex(re, -im); }
+	public Complex conjugate() {
+		return new Complex(re, -im);
+	}
 
 	// return a new Complex object whose value is the reciprocal of this
 	public Complex reciprocal() {
-		final double scale = re*re + im*im;
+		final double scale = re * re + im * im;
 		return new Complex(re / scale, -im / scale);
 	}
 
 	// return the real or imaginary part
-	public double re() { return re; }
-	public double im() { return im; }
+	public double re() {
+		return re;
+	}
+
+	public double im() {
+		return im;
+	}
 
 	// return a / b
 	public Complex divides(final Complex b) {
@@ -133,8 +143,6 @@ public class Complex {
 		return sin().divides(cos());
 	}
 
-
-
 	// a static version of plus
 	public static Complex plus(final Complex a, final Complex b) {
 		final double real = a.re + b.re;
@@ -142,8 +150,6 @@ public class Complex {
 		final Complex sum = new Complex(real, imag);
 		return sum;
 	}
-
-
 
 	// sample client for testing
 	public static void main(final String[] args) {

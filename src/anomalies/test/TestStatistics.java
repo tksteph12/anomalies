@@ -4,6 +4,7 @@
 package anomalies.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -11,7 +12,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import anomalies.point.Complex;
+import anomalies.DataPoint;
 import anomalies.signal.Signal;
 
 /**
@@ -24,13 +25,13 @@ public class TestStatistics {
 
 	@Before
 	public void buildSignal() {
-		final List<Complex> points = new ArrayList<Complex>();
-		Complex point;
+		final List<DataPoint> points = new ArrayList<DataPoint>();
+		DataPoint point;
 		// -------------------------------------------------------
 
 		for (int i = 1; i <= 60; i++) {
 
-			point = new Complex(i, i);
+			point = new DataPoint(new Date(), i);
 			points.add(point);
 		}
 		signal = new Signal(points, 60);
